@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+* {
+  box-sizing: border-box;
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+}
