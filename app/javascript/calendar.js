@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function createMonthSelect() {
     const selectContainer = document.querySelector('.month-select');
-
     // 年と月の選択肢を生成する
     const currentYear = currentDate.getFullYear();
     const yearsToShow = 2; // 表示する過去の年数
@@ -97,13 +96,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleMonthSelectChange() {
-    const selectYearMonth = document.querySelector('.month-select select:nth-child(1)');
-    const selectedYearMonth = parseInt(selectYearMonth.value, 10);
+    const selectYearMonth = document.querySelector('.month-select select');
+    const selectedYearMonth = selectYearMonth.value.split('-');
+    const selectedYear = parseInt(selectedYearMonth[0], 10);
+    const selectedMonth = parseInt(selectedYearMonth[1], 10);
 
-    currentDate.setFullYear(selectedYearMonth);
+    currentDate.setFullYear(selectedYear);
+    currentDate.setMonth(selectedMonth - 1);
     showCalendar();
   }
-
 });
 
 // 予定名を取得する関数（仮の例）
