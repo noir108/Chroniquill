@@ -1,0 +1,13 @@
+<%# CSS・・・assets/stylesheets/shared/header.css %>
+
+<header class='top-page-header'>
+  <div class='header-right'>
+    <%= image_tag "header-title.png", class:"title-icon" %>
+    <div class='top-title'>
+      Chroniquil
+    </div>
+  </div>
+  <div class='top-logout'>
+    <%= link_to 'Close the Chroniquil', destroy_user_session_path, method: :delete, class: "logout" %>
+  </div>
+</header>

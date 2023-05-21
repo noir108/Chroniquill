@@ -1,0 +1,42 @@
+.top-page-header {
+  background: #b69b63;
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.header-right {
+  position: relative;
+}
+
+.top-title {
+  position: relative;
+  z-index: 1;
+  font-size: 30px;
+  line-height: 80px;
+  font-weight: 700;
+  padding-left: 60px;
+}
+
+.title-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 45%;
+  height: auto;
+  object-fit: cover;
+}
+
+.top-logout {
+  text-align: center;
+  line-height: 80px;
+}
+
+.logout {
+  text-decoration: none;
+  color: #6d4845;
+  font-weight: 500;
+  margin-right: 50px;
+}
