@@ -1,0 +1,20 @@
+.footer {
+  background: #b69b63;
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.footer-contents {
+  margin-bottom: 10px;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: #6d4845;
+  font-size: 18px;
+  font-weight: 500;
+}
