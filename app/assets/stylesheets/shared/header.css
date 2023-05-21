@@ -1,7 +1,7 @@
 .top-page-header {
   background: #b69b63;
   width: 100vw;
-  height: 80px;
+  height: 70px;
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
@@ -15,7 +15,7 @@
   position: relative;
   z-index: 1;
   font-size: 30px;
-  line-height: 80px;
+  line-height: 70px;
   font-weight: 700;
   padding-left: 60px;
 }
@@ -31,7 +31,7 @@
 
 .top-logout {
   text-align: center;
-  line-height: 80px;
+  line-height: 70px;
 }
 
 .logout {
