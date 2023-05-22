@@ -1,0 +1,31 @@
+<%= render 'shared/header' %>
+
+<div class="new-main">
+  <%= form_with model: @schedule, class: "schedule-form", id: "schedule-form" do |form| %>
+    <div class="form-group">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :start_time %>
+      <%= form.date_field :start_time, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :end_time %>
+      <%= form.date_field :end_time, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :description %>
+      <%= form.text_area :description, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit "Write", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'shared/footer' %>

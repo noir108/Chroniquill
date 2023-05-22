@@ -1,13 +1,60 @@
-.main {
+/*                                        */
+/*               indexの記述               */
+/*                                        */
+
+
+.index-main {
   background-color: #e8d6ae;
   max-width: 100vw;
   height: calc(100vh - 130px);
   overflow-x: auto;
+  display: flex;
 }
 
 .calendar {
-  width: 800px;
+  width: 1260px;
   margin-left: 30px;
+}
+
+.right_menu {
+  width: 100px;
+  height: 100px;
+  margin-top: 80px;
+  margin-left: 40px;
+  display: flex;
+  border-radius: 63% 37% 54% 46%/55% 48% 52% 45%;
+}
+
+a.new {
+  font-size: 24px;
+  padding: 30px;
+  border-radius: 63% 37% 54% 46%/55% 48% 52% 45%;
+  background-color: #4d3614;
+  text-decoration: none;
+  color: #edeaec;
+  font-weight: 500;
+  transition: all 0.6s ease;
+}
+
+.feather-icon {
+  position: relative;
+  bottom: 45px;
+  right: 15px;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  opacity: 0;
+  transition: all 0.4s ease;
+
+}
+
+a.new:hover {
+  color: #edeaec;
+  border-radius: 54% 46% 38% 62%/49% 70% 40% 51%;
+}
+
+.right_menu:hover .feather-icon {
+  opacity: 1;
 }
 
 .calendar-header {
@@ -82,4 +129,50 @@
   color: #fff;
   background-color: #ff0000;
   padding: 2px;
+}
+
+
+/*                                        */
+/*                newの記述                */
+/*                                        */
+
+.new-main {
+  background-color: #e8d6ae;
+  max-width: 100vw;
+  height: calc(100vh - 130px);
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.schedule-form {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4d3614;
+  color: #edeaec;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
