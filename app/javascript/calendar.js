@@ -1,33 +1,33 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const calendarBody = document.querySelector('.calendar-body');
-  const monthYear = document.getElementById('month-year');
-  const prevBtn = document.getElementById('prev-btn');
-  const nextBtn = document.getElementById('next-btn');
+$(document).ready(function () {
+  const calendarBody = $('.calendar-body');
+  const monthYear = $('#month-year');
+  const prevBtn = $('#prev-btn');
+  const nextBtn = $('#next-btn');
 
   // カレンダーの初期表示
   const currentDate = new Date();
   showCalendar();
 
   // 前月ボタンクリック時の処理
-  prevBtn.addEventListener('click', () => {
+  prevBtn.on('click', function () {
     currentDate.setMonth(currentDate.getMonth() - 1);
     showCalendar();
   });
 
   // 次月ボタンクリック時の処理
-  nextBtn.addEventListener('click', () => {
+  nextBtn.on('click', function () {
     currentDate.setMonth(currentDate.getMonth() + 1);
     showCalendar();
   });
 
   // カレンダーを表示する関数
   function showCalendar() {
-    calendarBody.innerHTML = '';
+    calendarBody.empty();
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
 
     // 月と年を表示
-    monthYear.textContent = `${year}年 ${month + 1}月`;
+    monthYear.text(`${year}年 ${month + 1}月`);
 
     // プルダウンメニューを生成して年月の選択を可能にする
     createMonthSelect();
@@ -40,64 +40,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 日付を表示
     for (let i = 0; i < firstDay; i++) {
-      const emptyDate = document.createElement('div');
-      emptyDate.classList.add('date');
-      calendarBody.appendChild(emptyDate);
+      const emptyDate = $('<div></div>').addClass('date');
+      calendarBody.append(emptyDate);
     }
 
     for (let i = 1; i <= lastDate; i++) {
-      const date = document.createElement('div');
-      date.classList.add('date');
-      date.textContent = i;
-      calendarBody.appendChild(date);
+      const date = $('<div></div>').addClass('date').text(i);
+      calendarBody.append(date);
 
       // 今日の日付に色を付ける
       const today = new Date();
       if (year === today.getFullYear() && month === today.getMonth() && i === today.getDate()) {
-        date.classList.add('today');
+        date.addClass('today');
       }
 
       // 予定名を表示
       const event = getEventForDate(year, month, i);
       if (event) {
-        const eventName = document.createElement('div');
-        eventName.classList.add('event-name');
-        eventName.textContent = event;
-        date.appendChild(eventName);
+        const eventName = $('<div></div>').addClass('event-name').text(event);
+        date.append(eventName);
       }
     }
   }
+
   function createMonthSelect() {
-    const selectContainer = document.querySelector('.month-select');
+    const selectContainer = $('.month-select');
     // 年と月の選択肢を生成する
     const currentYear = currentDate.getFullYear();
     const yearsToShow = 2; // 表示する過去の年数
     const startYear = currentYear - yearsToShow;
     const endYear = currentYear + 1;
     const currentMonth = currentDate.getMonth() + 1;
-    const selectYearMonth = document.createElement('select');
-    selectYearMonth.addEventListener('change', handleMonthSelectChange);
+    const selectYearMonth = $('<select></select>').on('change', handleMonthSelectChange);
 
     for (let year = startYear; year <= endYear; year++) {
       for (let month = 1; month <= 12; month++) {
-        const option = document.createElement('option');
-        option.value = `${year}-${month}`;
-        option.textContent = `${year}.${String(month).padStart(2, '0')}`;
+        const option = $('<option></option>').val(`${year}-${month}`).text(`${year}.${String(month).padStart(2, '0')}`);
         if (year === currentYear && month === currentMonth) {
-          option.selected = true;
+          option.attr('selected', true);
         }
-        selectYearMonth.appendChild(option);
+        selectYearMonth.append(option);
       }
     }
 
     // プルダウンメニューを追加する
-    selectContainer.innerHTML = '';
-    selectContainer.appendChild(selectYearMonth);
+    selectContainer.empty();
+    selectContainer.append(selectYearMonth);
   }
-
   function handleMonthSelectChange() {
-    const selectYearMonth = document.querySelector('.month-select select');
-    const selectedYearMonth = selectYearMonth.value.split('-');
+    const selectYearMonth = $('.month-select select');
+    const selectedYearMonth = selectYearMonth.val().split('-');
     const selectedYear = parseInt(selectedYearMonth[0], 10);
     const selectedMonth = parseInt(selectedYearMonth[1], 10);
 
