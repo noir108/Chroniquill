@@ -50,6 +50,11 @@ a.user-link {
   padding: 5px;
 }
 
+.login-flash-message {
+  color: #ac291d;
+  font-weight: 500;
+}
+
 /*---------------------------------
 
   背景色の記述

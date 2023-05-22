@@ -16,8 +16,13 @@
   z-index: 1;
   font-size: 30px;
   line-height: 70px;
-  font-weight: 700;
   padding-left: 60px;
+}
+
+.t-title {
+  text-decoration: none;
+  color: #6d4845;
+  font-weight: 700;
 }
 
 .title-icon {
