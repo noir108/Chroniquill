@@ -117,6 +117,11 @@ a.new:hover {
   border-width: 0 2px 2px 0;
   /* カレンダーの日付部分の境界線 */
   font-weight: 500;
+  position: relative;
+}
+
+.prev-month {
+  color: rgba(109, 73, 69, 0.5);
 }
 
 /* 今日の日付に適用するスタイル */
@@ -124,11 +129,28 @@ a.new:hover {
   background-color: rgba(172, 41, 30, 0.5);
 }
 
-.event-name {
+.event-ul {
+  position: absolute;
+  bottom: 8px;
+  right: 5px;
+  display: inline-block;
+}
+
+.event-list {
+  list-style-type: none;
+  width: 130px;
   font-size: 12px;
-  color: #fff;
-  background-color: #ff0000;
-  padding: 2px;
+  color: #edeaec;
+  background-color: rgba(109, 73, 69, 0.5);
+  border-radius: 10px;
+  padding: 1px 5px;
+  margin-top: 5px;
+  /* はみ出した部分を...と表示 */
+  text-overflow: ellipsis;
+  /* 横幅内に収めるために改行を禁止 */
+  white-space: nowrap;
+  /* 必要な幅だけを表示 */
+  overflow: hidden;
 }
 
 

@@ -1,7 +1,12 @@
 class SchedulesController < ApplicationController
   
   def index
-    @schedule = Schedule.all
+    @schedules = current_user.schedules
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @schedules }
+    end
   end
   
   
