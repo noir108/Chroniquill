@@ -40,35 +40,81 @@ if (window.location.pathname === '/') {
       // 月の最終日を取得
       const lastDate = new Date(year, month + 1, 0).getDate();
 
-      // 日付を表示
-      for (let i = 0; i < firstDay; i++) {
-        const emptyDate = document.createElement('div');
-        emptyDate.classList.add('date');
-        calendarBody.appendChild(emptyDate);
-      }
+      // Ajaxでデータを取得して予定を表示
+      $.ajax({
+        url: '/schedules', // データを取得するURL
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+          // レスポンスを処理するコード
+          const events = {};
+          for (let i = 0; i < response.length; i++) {
+            const schedule = response[i];
+            const startDateTime = new Date(schedule.start_time);
+            const scheduleYear = startDateTime.getFullYear();
+            const scheduleMonth = startDateTime.getMonth() + 1;
+            const scheduleDay = startDateTime.getDate();
+            const eventKey = `${scheduleYear}-${String(scheduleMonth).padStart(2, '0')}-${String(scheduleDay).padStart(2, '0')}`;
+            if (events[eventKey]) {
+              events[eventKey].push(schedule.title); // 同じ日付の予定が既に存在する場合は配列に追加
+            } else {
+              events[eventKey] = [schedule.title]; // 新しい日付の予定として配列を作成
+            }
+            console.log(events)
+          }
 
-      for (let i = 1; i <= lastDate; i++) {
-        const date = document.createElement('div');
-        date.classList.add('date');
-        date.textContent = i;
-        calendarBody.appendChild(date);
+          // 日付を表示
+          for (let i = 0; i < firstDay; i++) {
+            const emptyDate = document.createElement('div');
+            emptyDate.classList.add('date', 'prev-month');
+            const prevMonthDate = new Date(year, month, -i).getDate();
+            emptyDate.textContent = prevMonthDate;
+            calendarBody.appendChild(emptyDate);
+          }
 
-        // 今日の日付に色を付ける
-        const today = new Date();
-        if (year === today.getFullYear() && month === today.getMonth() && i === today.getDate()) {
-          date.classList.add('today');
+          for (let i = 1; i <= lastDate; i++) {
+            const date = document.createElement('div');
+            date.classList.add('date');
+            date.textContent = i;
+            calendarBody.appendChild(date);
+
+            const event = events[`${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`];
+            if (event) {
+              const eventName = document.createElement('div');
+              eventName.classList.add('event-name');
+              date.appendChild(eventName);
+
+              if (Array.isArray(event)) {
+                // 予定名が複数ある場合、リストとして表示
+                const eventList = document.createElement('ul');
+                eventList.classList.add('event-ul'); // クラス名を追加
+                for (let j = 0; j < event.length; j++) {
+                  const eventItem = document.createElement('li');
+                  eventItem.classList.add('event-list');
+                  eventItem.textContent = event[j];
+                  eventList.appendChild(eventItem);
+                }
+                eventName.appendChild(eventList);
+              } else {
+                // 予定名が単一の場合、単純なテキスト表示
+                eventName.textContent = event;
+              }
+            }
+
+            // 今日の日付に色を付ける
+            const today = new Date();
+            if (year === today.getFullYear() && month === today.getMonth() && i === today.getDate()) {
+              date.classList.add('today');
+            }
+          }
+        },
+        error: function (xhr, status, error) {
+          // エラーハンドリングのコード
+          console.error(error); // エラーメッセージをコンソールに出力する例
         }
-
-        // 予定名を表示
-        const event = getEventForDate(year, month, i);
-        if (event) {
-          const eventName = document.createElement('div');
-          eventName.classList.add('event-name');
-          eventName.textContent = event;
-          date.appendChild(eventName);
-        }
-      }
+      });
     }
+
     function createMonthSelect() {
       const selectContainer = document.querySelector('.month-select');
       // 年と月の選択肢を生成する
@@ -108,17 +154,4 @@ if (window.location.pathname === '/') {
       showCalendar();
     }
   });
-
-  // 予定名を取得する関数（仮の例）
-  function getEventForDate(year, month, day) {
-    // ここで指定した年月日に対応する予定名を返す処理を実装する
-    // 仮の例として、特定の日には固定の予定名を返すようにしています
-    const events = {
-      '2023-05-01': 'ミーティング',
-      '2023-05-05': '誕生日',
-      '2023-05-15': '打ち合わせ',
-    };
-    const eventKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    return events[eventKey] || null;
-  };
 }

@@ -3,7 +3,7 @@ class Schedule < ApplicationRecord
   with_options presence: true do
     validates :title, :start_time
   end
-  validate :start_time_before_end_time,:end_time_after_start_time
+  validate :start_time_before_end_time, :end_time_after_start_time
 
   def start_time_before_end_time  #start_timeがend_timeより後の日付だとバツ
     if start_time && end_time && start_time > end_time
