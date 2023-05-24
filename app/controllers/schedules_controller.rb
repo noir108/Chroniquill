@@ -10,7 +10,10 @@ class SchedulesController < ApplicationController
     end
   end
   
-  
+  def index2
+    @schedules = current_user.schedules
+  end
+
   def new
     @schedule = Schedule.new
   end
