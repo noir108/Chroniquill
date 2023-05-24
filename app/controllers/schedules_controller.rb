@@ -1,5 +1,6 @@
 class SchedulesController < ApplicationController
-  
+  before_action :set_schedule, only: [:edit, :update]
+
   def index
     @schedules = current_user.schedules
 
@@ -23,10 +24,25 @@ class SchedulesController < ApplicationController
     end
   end
 
+def edit
+end
+
+def update
+  if @schedule.update(schedule_params)
+    redirect_to action: :index
+  else
+    render :edit
+  end
+end
+
+
   private
 
   def schedule_params
     params.require(:schedule).permit(:title, :start_time, :end_time, :description).merge(user_id: current_user.id)
   end
 
+  def set_schedule
+    @schedule = Schedule.includes(:user).find(params[:id])
+  end
 end
