@@ -134,6 +134,8 @@ a.new:hover {
   bottom: 8px;
   right: 5px;
   display: inline-block;
+  overflow: auto;
+  max-height: 80px;
 }
 
 .event-list {
@@ -151,6 +153,7 @@ a.new:hover {
   white-space: nowrap;
   /* 必要な幅だけを表示 */
   overflow: hidden;
+  cursor: pointer;
 }
 
 

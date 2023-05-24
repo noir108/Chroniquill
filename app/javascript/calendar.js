@@ -1,6 +1,6 @@
 if (window.location.pathname === '/') {
 
-  document.addEventListener('turbolinks:load', () => {
+  document.addEventListener('DOMContentLoaded', () => {
     const calendarBody = document.querySelector('.calendar-body');
     const monthYear = document.getElementById('month-year');
     const prevBtn = document.getElementById('prev-btn');
@@ -54,16 +54,15 @@ if (window.location.pathname === '/') {
             const scheduleYear = startDateTime.getFullYear();
             const scheduleMonth = startDateTime.getMonth() + 1;
             const scheduleDay = startDateTime.getDate();
-            const eventKey = `${scheduleYear}-${String(scheduleMonth).padStart(2, '0')}-${String(scheduleDay).padStart(2, '0')}`;
-            if (events[eventKey]) {
-              events[eventKey].push(schedule.title); // 同じ日付の予定が既に存在する場合は配列に追加
+            const scheduleKey = `${scheduleYear}-${String(scheduleMonth).padStart(2, '0')}-${String(scheduleDay).padStart(2, '0')}`;
+            if (events[scheduleKey]) {
+              events[scheduleKey].push([schedule.id, schedule.title]); // 同じ日付の予定が既に存在する場合は配列に追加
             } else {
-              events[eventKey] = [schedule.title]; // 新しい日付の予定として配列を作成
+              events[scheduleKey] = [[schedule.id, schedule.title]]; // 新しい日付の予定として配列を作成
             }
-            console.log(events)
           }
 
-          // 日付を表示
+          // 前月と後月の日付を表示
           for (let i = 0; i < firstDay; i++) {
             const emptyDate = document.createElement('div');
             emptyDate.classList.add('date', 'prev-month');
@@ -71,34 +70,37 @@ if (window.location.pathname === '/') {
             emptyDate.textContent = prevMonthDate;
             calendarBody.appendChild(emptyDate);
           }
-
+          // 日付を表示
           for (let i = 1; i <= lastDate; i++) {
             const date = document.createElement('div');
             date.classList.add('date');
             date.textContent = i;
             calendarBody.appendChild(date);
 
+            //日付をキーに配列の値を取得[0]がid、[1]が予定名
             const event = events[`${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`];
+
+            // 値がある日付に予定名をリストで表示
             if (event) {
               const eventName = document.createElement('div');
-              eventName.classList.add('event-name');
+              eventName.classList.add('event-name');    // クラス名を追加
               date.appendChild(eventName);
+              const eventList = document.createElement('ul');
+              eventList.classList.add('event-ul');      // クラス名を追加
+              for (let j = 0; j < event.length; j++) {
+                const eventItem = document.createElement('li');
+                eventItem.classList.add('event-list');  // クラス名を追加
+                eventItem.textContent = event[j][1];
+                eventList.appendChild(eventItem);
 
-              if (Array.isArray(event)) {
-                // 予定名が複数ある場合、リストとして表示
-                const eventList = document.createElement('ul');
-                eventList.classList.add('event-ul'); // クラス名を追加
-                for (let j = 0; j < event.length; j++) {
-                  const eventItem = document.createElement('li');
-                  eventItem.classList.add('event-list');
-                  eventItem.textContent = event[j];
-                  eventList.appendChild(eventItem);
-                }
-                eventName.appendChild(eventList);
-              } else {
-                // 予定名が単一の場合、単純なテキスト表示
-                eventName.textContent = event;
+                // 予定名の要素にクリックイベントリスナーを追加
+                eventItem.addEventListener('click', () => {
+                  const scheduleId = event[j][0];
+                  const editUrl = `/schedules/${scheduleId}/edit`;
+                  window.location.href = editUrl; // ブラウザを編集画面へのURLにリダイレクト
+                });
               }
+              eventName.appendChild(eventList);
             }
 
             // 今日の日付に色を付ける
