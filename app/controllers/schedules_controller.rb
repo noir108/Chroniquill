@@ -1,5 +1,5 @@
 class SchedulesController < ApplicationController
-  before_action :set_schedule, only: [:edit, :update]
+  before_action :set_schedule, only: [:edit, :update, :destroy]
 
   def index
     @schedules = current_user.schedules
@@ -33,6 +33,13 @@ def update
   else
     render :edit
   end
+end
+
+def destroy
+  return unless current_user.id == @schedule.user.id
+
+  @schedule.destroy
+  redirect_to action: :index
 end
 
 
