@@ -1,4 +1,51 @@
 /*                                        */
+/*               右側メニュー               */
+/*                                        */
+
+
+.right_menu {
+  width: 100px;
+  height: 100px;
+  margin-top: 80px;
+  margin-left: 40px;
+  display: flex;
+  border-radius: 63% 37% 54% 46%/55% 48% 52% 45%;
+}
+
+a.new {
+  font-size: 24px;
+  padding: 30px;
+  border-radius: 63% 37% 54% 46%/55% 48% 52% 45%;
+  background-color: #4d3614;
+  text-decoration: none;
+  color: #edeaec;
+  font-weight: 500;
+  transition: all 0.6s ease;
+}
+
+.feather-icon {
+  position: relative;
+  bottom: 45px;
+  right: 15px;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+a.new:hover {
+  color: #edeaec;
+  border-radius: 54% 46% 38% 62%/49% 70% 40% 51%;
+}
+
+.right_menu:hover .feather-icon {
+  opacity: 1;
+}
+
+
+
+/*                                        */
 /*            ローディング画面の記述          */
 /*                                        */
 
