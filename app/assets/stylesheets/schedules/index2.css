@@ -10,7 +10,7 @@
   list-style: none;
 }
 
-.heading-010 {
+.head-bj {
   display: inline-block;
   position: relative;
   transform: rotate(-5deg);
@@ -18,9 +18,18 @@
   border-left: 2px dotted rgba(232, 215, 175, 0.6);
   border-right: 2px dotted rgba(232, 215, 175, 0.6);
   box-shadow: 0 0 5px rgba(0, 0, 0, .2);
-  background-color: rgba(0, 66, 109, 0.5);
+  background-color: rgba(0, 66, 109, 0.8);
+  font-size: 25px;
   color: #edeaec;
+  margin-bottom: 30px;
 }
+
+.date-month {
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
 
 /*                                        */
 /*               フェードイン               */
@@ -30,14 +39,14 @@
   display: block;
   color: transparent;
   font-size: 18px;
+  font-weight: 500;
+  padding-left: 10px;
   line-height: 1.4;
-  margin-bottom: 10px;
   background-clip: text;
   -webkit-background-clip: text;
   background-size: 300% 300%;
   position: relative;
   display: block;
-
 
   &.to__bottom {
     background-image: linear-gradient(to bottom,
@@ -63,56 +72,81 @@
 .acbox-item {
   width: 800px;
   font-size: 20px;
-  border-bottom: 2px solid #ac291d;
+  border-bottom: 2px solid #b69b63;
+  margin-bottom: 20px;
 }
 
 .event-acbox input {
   display: none;
 }
 
-.event-acbox div {
+.date-day {
+  width: 120px;
+  font-weight: 300;
+}
+
+.event-acbox .acbox-under {
   height: 0px;
   overflow: hidden;
   opacity: 0;
-  transition: 0.15s;
-  /* 開閉スピードの設定 */
+  transition: 0.2s;
 }
 
 .event-acbox input:checked~div {
   height: auto;
-  padding: 8px;
-  /* 開いた部分の枠内の余白 */
-  border-radius: 10px;
-  background: rgba(183, 156, 100, 0.5);
-  /* 開いた部分の背景色 */
+  padding: 10px 0;
+  padding-left: 40px;
   opacity: 1;
 }
 
 .event-acbox .acbox-item {
   font-size: 15px;
   color: #4d3614;
+  font-weight: 400;
 }
 
 
-.fade-text::before,
-.fade-text::after {
-  width: 3px;
-  height: .9em;
-  border-radius: 5px;
-  background-color: #4d3614b3;
-  content: '';
+/*                                        */
+/*               右側メニュー               */
+/*                                        */
+
+
+.right_menu {
+  width: 100px;
+  height: 100px;
+  margin-top: 80px;
+  margin-left: 40px;
+  display: flex;
+  border-radius: 63% 37% 54% 46%/55% 48% 52% 45%;
 }
 
-.fade-text::before {
-  position: absolute;
-  right: 2em;
-  rotate: 90deg;
+a.new {
+  font-size: 24px;
+  padding: 30px;
+  border-radius: 63% 37% 54% 46%/55% 48% 52% 45%;
+  background-color: #4d3614;
+  text-decoration: none;
+  color: #edeaec;
+  font-weight: 500;
+  transition: all 0.6s ease;
 }
 
-.fade-text::after {
-  transition: rotate 0.3s;
+.feather-icon {
+  position: relative;
+  bottom: 45px;
+  right: 15px;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  opacity: 0;
+  transition: all 0.4s ease;
 }
 
-.fade-text[open] ::after {
-  rotate: 90deg;
+a.new:hover {
+  color: #edeaec;
+  border-radius: 54% 46% 38% 62%/49% 70% 40% 51%;
+}
+
+.right_menu:hover .feather-icon {
+  opacity: 1;
 }
