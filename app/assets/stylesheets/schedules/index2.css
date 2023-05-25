@@ -1,0 +1,118 @@
+.index-sub {
+  background-color: #e8d6ae;
+  max-width: 100vw;
+  height: calc(100vh - 130px);
+  overflow: auto;
+  padding: 30px;
+}
+
+.event-acbox .acbox-item {
+  list-style: none;
+}
+
+.heading-010 {
+  display: inline-block;
+  position: relative;
+  transform: rotate(-5deg);
+  padding: .5em .7em;
+  border-left: 2px dotted rgba(232, 215, 175, 0.6);
+  border-right: 2px dotted rgba(232, 215, 175, 0.6);
+  box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+  background-color: rgba(0, 66, 109, 0.5);
+  color: #edeaec;
+}
+
+/*                                        */
+/*               フェードイン               */
+/*                                        */
+
+.fade-text {
+  display: block;
+  color: transparent;
+  font-size: 18px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-size: 300% 300%;
+  position: relative;
+  display: block;
+
+
+  &.to__bottom {
+    background-image: linear-gradient(to bottom,
+        #4d3614 30%,
+        rgba(78, 55, 20, 0) 70%);
+    background-position: center 100%;
+    transform: translate(0, -20px);
+    animation: toBottom var(--duration, 2.4s) var(--ease) var(--delay, 0.6s) forwards;
+  }
+}
+
+@keyframes toBottom {
+  100% {
+    transform: translate(0, 0);
+    background-position: center 0%;
+  }
+}
+
+/*                                        */
+/*           アコーディオンボックス           */
+/*                                        */
+
+.acbox-item {
+  width: 800px;
+  font-size: 20px;
+  border-bottom: 2px solid #ac291d;
+}
+
+.event-acbox input {
+  display: none;
+}
+
+.event-acbox div {
+  height: 0px;
+  overflow: hidden;
+  opacity: 0;
+  transition: 0.15s;
+  /* 開閉スピードの設定 */
+}
+
+.event-acbox input:checked~div {
+  height: auto;
+  padding: 8px;
+  /* 開いた部分の枠内の余白 */
+  border-radius: 10px;
+  background: rgba(183, 156, 100, 0.5);
+  /* 開いた部分の背景色 */
+  opacity: 1;
+}
+
+.event-acbox .acbox-item {
+  font-size: 15px;
+  color: #4d3614;
+}
+
+
+.fade-text::before,
+.fade-text::after {
+  width: 3px;
+  height: .9em;
+  border-radius: 5px;
+  background-color: #4d3614b3;
+  content: '';
+}
+
+.fade-text::before {
+  position: absolute;
+  right: 2em;
+  rotate: 90deg;
+}
+
+.fade-text::after {
+  transition: rotate 0.3s;
+}
+
+.fade-text[open] ::after {
+  rotate: 90deg;
+}

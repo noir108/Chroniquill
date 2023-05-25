@@ -1,1 +1,25 @@
-<h1>Index 2</h1>
+<%# CSS・・・assets/stylesheets/index2 %>
+<%= render 'shared/header' %>
+
+<div class='index-sub'>
+<h3 class="heading-010">CSS見出しデザイン</h3>
+  <ul class="event-acbox">
+    <% @schedules.each do |s| %>
+      <li class="acbox-item">
+        <input id="ac-<%= s.id %>" type="checkbox" />
+        <label for="ac-<%= s.id %>" class="fade-text to__bottom" style="--duration: 2.4s; --delay: 0.6s; --ease: ease-out">
+          <%= s.start_time.strftime('%m/%d') %>
+          <%= s.end_time&.strftime('%m/%d') %>
+          <%= s.title %>
+        </label>
+        <% if s.description.present? %>
+          <div class="acbox-under">
+            <%= s.description %>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+    </ul>
+</div>
+
+<%= render 'shared/footer' %>
