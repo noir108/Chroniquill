@@ -1,4 +1,4 @@
-if (window.location.pathname === '/') {
+if (window.location.pathname === '/schedules' || window.location.pathname === '/') {
 
   document.addEventListener('DOMContentLoaded', () => {
     const calendarBody = document.querySelector('.calendar-body');

@@ -21,7 +21,7 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.create(schedule_params)
     if @schedule.save
-      redirect_to action: :index
+      redirect_to root_path
     else
       render :new
     end
@@ -32,7 +32,7 @@ end
 
 def update
   if @schedule.update(schedule_params)
-    redirect_to action: :index
+    redirect_to root_path
   else
     render :edit
   end
