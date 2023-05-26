@@ -56,7 +56,7 @@ URL※	デプロイ済みのURLを記載。デプロイが済んでいない場�
 | start_time           | datetime   | null: false                    |
 | end_time             | datetime   | null: true                     |
 | user                 | references | null: false, foreign_key: true |
-| category             | references | null: false, foreign_key: true |
+| category             | references | null: true,  foreign_key: true |
 
 #### アソシエーション
 
