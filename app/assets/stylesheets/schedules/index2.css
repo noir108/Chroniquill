@@ -1,19 +1,36 @@
 .index-sub {
   background-color: #e8d6ae;
   max-width: 100vw;
-  height: calc(100vh - 130px);
+  height: calc(100vh - 70px);
   overflow: auto;
   display: flex;
   padding: 30px;
 }
 
 .journal {
-  width: 1300px;
+  width: 900px;
+  height: calc(100vh - 70px);
   margin-left: 30px;
+  padding-bottom: 30px;
 }
 
 .event-acbox .acbox-item {
   list-style: none;
+}
+
+#scr-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #00426d;
+  font-family: 'Slackside One', cursive;
+  color: #edeaec;
+  font-size: 40px;
+  cursor: pointer;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  text-align: center;
 }
 
 .head-bj {
@@ -33,7 +50,6 @@
 .date-month {
   font-size: 30px;
   font-weight: 500;
-  margin-bottom: 10px;
 }
 
 
@@ -75,6 +91,10 @@
 /*           アコーディオンボックス           */
 /*                                        */
 
+.event-acbox {
+  padding: 10px;
+}
+
 .acbox-item {
   width: 800px;
   font-size: 20px;
@@ -111,129 +131,39 @@
   font-weight: 400;
 }
 
-
-
-
-
-
-.sel {
-  font-size: 1rem;
-  display: inline-block;
-  margin: 3em 2em;
-  width: 350px;
-  background-color: transparent;
+.select-month {
+  display: inline-flex;
+  align-items: center;
   position: relative;
-  cursor: pointer;
+  margin-left: 30px;
 }
 
-.sel::before {
+.select-month::after {
   position: absolute;
-  content: '\f063';
-  font-family: 'FontAwesome';
-  font-size: 2em;
-  color: #FFF;
-  right: 20px;
-  top: calc(50% - 0.5em);
-}
-
-.sel.active::before {
-  transform: rotateX(-180deg);
-}
-
-.sel__placeholder {
-  display: block;
-  font-family: 'Quicksand';
-  font-size: 2.3em;
-  color: #838e95;
-  padding: 0.2em 0.5em;
-  text-align: left;
+  right: 15px;
+  width: 10px;
+  height: 7px;
+  background-color: #8d6865;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  content: '';
   pointer-events: none;
-  user-select: none;
-  visibility: visible;
 }
 
-.sel.active .sel__placeholder {
-  visibility: hidden;
-}
-
-.sel__placeholder::before {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0.2em 0.5em;
-  content: attr(data-placeholder);
-  visibility: hidden;
-}
-
-.sel.active .sel__placeholder::before {
-  visibility: visible;
-}
-
-.sel__box {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: -4px;
-  display: none;
-  list-style-type: none;
-  text-align: left;
+.select-month select {
+  appearance: none;
+  min-width: 230px;
+  height: 2.8em;
+  padding: .4em calc(.8em + 30px) .4em .8em;
+  border: none;
+  border-bottom: 2px solid #00426d;
+  background-color: #e8d6ae;
+  color: #6d4845;
   font-size: 1em;
-  background-color: #FFF;
-  width: calc(100% + 8px);
-  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
 }
 
-.sel.active .sel__box {
-  display: block;
-  animation: fadeInUp 500ms;
-}
-
-.sel__box__options {
-  display: list-item;
-  font-family: 'Quicksand';
-  font-size: 1.5em;
-  color: #838e95;
-  padding: 0.5em 1em;
-  user-select: none;
-}
-
-.sel__box__options::after {
-  content: '\f00c';
-  font-family: 'FontAwesome';
-  font-size: 0.5em;
-  margin-left: 5px;
-  display: none;
-}
-
-.sel__box__options.selected::after {
-  display: inline;
-}
-
-.sel__box__options:hover {
-  background-color: #ebedef;
-}
-
-
-/* ===== Keyframes ===== */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 20px, 0);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
+.select-month select:focus {
+  outline: none;
 }
