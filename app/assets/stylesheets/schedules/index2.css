@@ -52,6 +52,11 @@
   font-weight: 500;
 }
 
+.fade-text a {
+  text-decoration: none;
+  color: #4d3614;
+  font-weight: 500;
+}
 
 /*                                        */
 /*               フェードイン               */
@@ -61,7 +66,6 @@
   display: block;
   color: transparent;
   font-size: 18px;
-  font-weight: 500;
   padding-left: 10px;
   line-height: 1.4;
   background-clip: text;

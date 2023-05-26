@@ -1,39 +1,53 @@
 <%# CSS・・・assets/stylesheets/index2 %>
-<%= render 'shared/header' %>
+<header><%= render 'shared/header' %></header>
 
-<div class='index-sub'>
-  <div class="head-bj">Bullet journal</div>
-  <a href="#<%= month %>">月の見出し</a>
-  <% @schedules_by_month.each do |month, schedules| %>
+<div class='index-sub' id="ind-sub">
+  <div class='journal'>
 
-    <div class="date-month" id="<%= month %>"><%= month %></div>
+    <div class="head-bj">Bullet journal</div>
 
-    <ul class="event-acbox">
-        <% schedules.each do |s| %>
-        <li class="acbox-item">
-          <input id="ac-<%= s.id %>" type="checkbox" />
-          <label for="ac-<%= s.id %>" class="fade-text to__bottom" style="--duration: 2.4s; --delay: 0.6s; --ease: ease-out">
-            <div class="date-day">
-              <%= s.start_time.strftime('%m/%d') %>
-              <% if s.end_time.present? %>
-                 〜 
+    <div class="select-month">
+      <select>
+        <% @schedules_by_month.each do |month, schedules| %>
+          <option value="#<%= month %>"><%= month %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <% @schedules_by_month.each do |month, schedules| %>
+      <div class="date-month" id="<%= month %>"><%= month %></div>
+      <ul class="event-acbox">
+          <% schedules.each do |s| %>
+          <li class="acbox-item">
+            <input id="ac-<%= s.id %>" type="checkbox" />
+            <label for="ac-<%= s.id %>" class="fade-text to__bottom" style="--duration: 2.4s; --delay: 0.6s; --ease: ease-out">
+              <div class="date-day">
+                <%= s.start_time.strftime('%m/%d') %>
+                <% if s.end_time.present? %>
+                   〜 
+                <% end %>
+                <%= s.end_time&.strftime('%m/%d') %>
+              </div>
+              <% if s.description.present? %>
+              ▽
               <% end %>
-              <%= s.end_time&.strftime('%m/%d') %>
-            </div>
+              <%= link_to  s.title ,  edit_schedule_path(id: s.id) %>
+            </label>
             <% if s.description.present? %>
-            ▽
+              <div class="acbox-under">
+                <%= s.description %>
+              </div>
             <% end %>
-            <%= s.title %>
-          </label>
-          <% if s.description.present? %>
-            <div class="acbox-under">
-              <%= s.description %>
-            </div>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-</div>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
 
+  <div class="right_menu">
+    <%= link_to "Write", new_schedule_path, class: "new feather-icon-container" %>
+    <%= image_tag "feather.png", class:"feather-icon" %>
+  </div>
+</div>
+<div class="button" id="scr-btn">↑</div>
 <%= render 'shared/footer' %>
