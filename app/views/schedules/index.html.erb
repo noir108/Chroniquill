@@ -1,5 +1,7 @@
 
-<%= render 'shared/header' %>
+<%= render 'shared/loading' %>
+
+<!-- コンテンツ部分 -->
 <div class='index-main'>
 
   <div class="calendar">
@@ -23,8 +25,11 @@
     </div>
   </div>
   <div class="right_menu">
-    <%= link_to "Write", new_schedule_path, class: "new feather-icon-container" %>
-    <%= image_tag "feather.png", class:"feather-icon" %>
+    <div class="new">
+      <%= link_to "Write", new_schedule_path, class: "top-btn feather-icon-container" %>
+    </div>
+    <div class="list">
+      <%= link_to "List.", index2_schedules_path, class: "top-btn feather-icon-container" %>
+    </div>
   </div>
 </div>
-<%= render 'shared/footer' %>

@@ -1,10 +1,14 @@
-if (window.location.pathname === '/') {
+if (window.location.pathname === '/schedules' || window.location.pathname === '/') {
 
   document.addEventListener('DOMContentLoaded', () => {
     const calendarBody = document.querySelector('.calendar-body');
     const monthYear = document.getElementById('month-year');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
+
+    // ローディング画面の表示
+    const spinner = document.getElementById('loading');
+    spinner.classList.add('loaded');
 
     // カレンダーの初期表示
     const currentDate = new Date();
