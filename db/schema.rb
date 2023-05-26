@@ -26,8 +26,10 @@ ActiveRecord::Schema.define(version: 2023_05_26_053702) do
     t.datetime "start_time", null: false
     t.datetime "end_time"
     t.bigint "user_id", null: false
+    t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_schedules_on_category_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
@@ -45,5 +47,6 @@ ActiveRecord::Schema.define(version: 2023_05_26_053702) do
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "schedules", "categories"
   add_foreign_key "schedules", "users"
 end
