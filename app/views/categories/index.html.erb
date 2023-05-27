@@ -1,0 +1,11 @@
+<% @categories.each do |category| %>
+  <%= category.name %>
+  <%= link_to '編集', edit_category_path(category), class: 'edit-link', data: { category_id: category.id } %>
+  <%= link_to '削除', category_path(category), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'delete-link' %>
+  <br>
+<% end %>
+
+<%= form_for @category, url: categories_path, remote: true, class: 'category-form' do |f| %>
+  <%= f.text_field :name, placeholder: '新しいカテゴリー名' %>
+  <%= f.submit '追加', class: 'submit-btn' %>
+<% end %>
