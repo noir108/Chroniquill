@@ -16,6 +16,7 @@ class SchedulesController < ApplicationController
 
   def new
     @schedule = Schedule.new
+    @categories = current_user.categorys
   end
   
   def create
@@ -49,7 +50,7 @@ end
   private
 
   def schedule_params
-    params.require(:schedule).permit(:title, :start_time, :end_time, :description).merge(user_id: current_user.id)
+    params.require(:schedule).permit(:title, :start_time, :end_time, :description).merge(user_id: current_user.id, category_id: params[:schedule][:category_id])
   end
 
   def set_schedule
