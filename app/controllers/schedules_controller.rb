@@ -41,9 +41,8 @@ end
 
 def destroy
   return unless current_user.id == @schedule.user.id
-
   @schedule.destroy
-  redirect_to action: :index
+  redirect_to root_path
 end
 
 
