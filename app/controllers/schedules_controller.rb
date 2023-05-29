@@ -16,7 +16,7 @@ class SchedulesController < ApplicationController
 
   def new
     @schedule = Schedule.new
-    @categories = current_user.categorys
+    @categories = current_user.categories
   end
   
   def create
@@ -29,6 +29,7 @@ class SchedulesController < ApplicationController
   end
 
 def edit
+  @categories = current_user.categories
 end
 
 def update
