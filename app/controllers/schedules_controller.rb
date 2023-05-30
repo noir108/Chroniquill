@@ -16,6 +16,7 @@ class SchedulesController < ApplicationController
 
   def new
     @schedule = Schedule.new
+    @categories = current_user.categories
   end
   
   def create
@@ -28,6 +29,7 @@ class SchedulesController < ApplicationController
   end
 
 def edit
+  @categories = current_user.categories
 end
 
 def update
@@ -40,16 +42,15 @@ end
 
 def destroy
   return unless current_user.id == @schedule.user.id
-
   @schedule.destroy
-  redirect_to action: :index
+  redirect_to root_path
 end
 
 
   private
 
   def schedule_params
-    params.require(:schedule).permit(:title, :start_time, :end_time, :description).merge(user_id: current_user.id)
+    params.require(:schedule).permit(:title, :start_time, :end_time, :description).merge(user_id: current_user.id, category_id: params[:schedule][:category_id])
   end
 
   def set_schedule

@@ -1,5 +1,3 @@
-<%= render 'shared/header' %>
-
 <div class="new-main">
   <%= form_with model: @schedule, class: "schedule-form", local: true, id: "schedule-form" do |f| %>
     <%= render 'shared/error_messages', model: f.object %>
@@ -19,6 +17,11 @@
     </div>
 
     <div class="form-group">
+      <%= f.label :category_id %>
+      <%= f.collection_select :category_id, @categories, :id, :name %>
+    </div>
+
+    <div class="form-group">
       <%= f.label :description %>
       <%= f.text_area :description, class: "form-control" %>
     </div>
@@ -29,5 +32,3 @@
     </div>
   <% end %>
 </div>
-
-<%= render 'shared/footer' %>

@@ -7,6 +7,7 @@ class CreateSchedules < ActiveRecord::Migration[6.0]
       t.datetime :start_time,		  null: false
       t.datetime :end_time,     	null: true
       t.references :user, null: false, foreign_key: true
+      t.references :category, null: true, foreign_key: true
 
       t.timestamps
     end

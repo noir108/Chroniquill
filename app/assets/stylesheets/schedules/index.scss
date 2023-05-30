@@ -6,8 +6,9 @@
 .index-main {
   background-color: #e8d6ae;
   max-width: 100vw;
-  height: calc(100vh - 70px);
-  overflow: auto;
+  height: calc(100vh - 130px);
+  overscroll-behavior-y: contain;
+  overflow-y: auto;
   display: flex;
 }
 
@@ -48,7 +49,7 @@
   grid-template-columns: repeat(7, 1fr);
   border: solid #b69b63;
   border-width: 2px 0 0 2px;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .day-header {

@@ -1,0 +1,59 @@
+<div class="category-ind">
+  <div id="new-form-container">
+    <%= form_with model: @category, local: true, class: 'category-form', id: "cat-form"  do |f| %>
+      <%= f.hidden_field :id %>
+      <%= f.text_field :name %>
+      <%= f.submit '追加', class: 'cat-btn', id: "add-submit" %>
+    <% end %>
+  </div>
+
+<!--<div id="edit-form-container" style="display: none;">
+    <%= form_with model: nil, url: '', remote: true, id: 'edit-form' do |f| %>
+      <%= f.hidden_field :id %>
+      <%= f.text_field :name %>
+      <%= f.submit '更新', class: 'cat-btn', id: "up-submit" %>
+    <% end %>
+  </div>
+-->
+
+  <div class="category-list">
+    <% @categories.each do |category| %>
+      <%= category.name %>
+      <%= link_to '編集', '#', class: 'edit-link', data: { category_id: category.id } %>
+      <%= link_to '削除', category_path(category), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'delete-link' %>
+      <br>
+    <% end %>
+  </div>
+</div>
+
+
+<!--
+<script>
+  // JavaScriptのコードをここに記述する
+  $(document).on('click', '.edit-link', function (e) {
+    e.preventDefault();
+    $('#new-form-container').hide();
+    $('#edit-form-container').show();
+    const link = $(this);
+    const categoryId = link.data('category-id');
+    const editUrl = '/categories/' + categoryId;
+
+
+    $('#up-submit').off('click').on('click', function (e) {
+      e.preventDefault();
+      const formData = $('#edit-form').serialize();
+      const updatedFormData = `${formData}&category[id]=${categoryId}`;
+
+      $.ajax({
+        url: editUrl,
+        method: 'PATCH',
+        data: updatedFormData,
+        success: function (response) {
+        },
+        error: function (xhr, status, error) {
+        }
+      });
+    });
+  });
+</script>
+-->
