@@ -1,5 +1,6 @@
 .journal {
   width: 800px;
+
 }
 
 .category {
@@ -44,6 +45,7 @@
 .date-ed-de a,
 .cat-ed-de a {
   text-decoration: none;
+  font-weight: 300;
 }
 
 .event-edit {
@@ -157,7 +159,7 @@
   justify-content: space-between;
 }
 
-ul.cat-ul li {
+ul.catlist li {
   width: 400px;
   position: relative;
   padding: 0.5em 0 0.2em 2.3em;
@@ -166,8 +168,8 @@ ul.cat-ul li {
   border-bottom: 1px solid rgba(0, 111, 95, 0.8);
 }
 
-ul.cat-ul li:after,
-ul.cat-ul li:before {
+ul.catlist li:after,
+ul.catlist li:before {
   content: "";
   position: absolute;
   -webkit-transform: rotate(45deg);
@@ -177,7 +179,7 @@ ul.cat-ul li:before {
   transform: rotate(45deg);
 }
 
-ul.cat-ul li:before {
+ul.catlist li:before {
   top: 0.7em;
   left: 0.2em;
   width: 12px;
@@ -185,7 +187,7 @@ ul.cat-ul li:before {
   border: 2px solid rgba(0, 66, 109, 0.7);
 }
 
-ul.cat-ul li:after {
+ul.catlist li:after {
   top: 0.9em;
   left: 0.7em;
   width: 14px;

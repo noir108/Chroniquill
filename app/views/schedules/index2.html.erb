@@ -56,15 +56,15 @@
   <div class="category">
     <div class="title-bj">Category list</div>
     <div class="category_list">
-      <ul class="cat-ul">
+      <ul class="catlist">
         <% current_user.categories.each do |category| %>
           <li class="category-contents">
             <div class="cat-name">
-              <%= category.name %>
+              <span><%= category.name %></span>
             </div>
             <div class="cat-ed-de">
               <%= link_to  "編集" ,  "#", class: "event-edit" %>
-              <%= link_to  "削除" ,  category_path(id: category.id), class: "event-delete" %>
+              <%= link_to  "削除" ,  category_path(id: category.id), method: :delete, class: "event-delete" %>
             </div>
           </li>
         <% end %>
