@@ -1,4 +1,63 @@
 /*                                        */
+/*                年月日選択                */
+/*                                        */
+.select-month select:focus,
+.select-month-ind2 select:focus {
+  outline: none;
+}
+
+.select-month {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.select-month select {
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  color: #edeaec;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+
+
+.select-month-ind2 {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  margin-left: 30px;
+}
+
+.select-month-ind2::after {
+  position: absolute;
+  right: 15px;
+  width: 10px;
+  height: 7px;
+  background-color: #8d6865;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  content: '';
+  pointer-events: none;
+}
+
+.select-month-ind2 select {
+  appearance: none;
+  min-width: 230px;
+  height: 2.8em;
+  padding: .4em calc(.8em + 30px) .4em .8em;
+  border: none;
+  border-bottom: 2px solid #00426d;
+  background-color: transparent;
+  color: #6d4845;
+  font-size: 1em;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
+/*                                        */
 /*               右側メニュー               */
 /*                                        */
 

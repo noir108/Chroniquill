@@ -122,7 +122,7 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
     }
 
     function createMonthSelect() {
-      const selectContainer = document.querySelector('.month-select');
+      const selectContainer = document.querySelector('.select-month');
       // 年と月の選択肢を生成する
       const currentYear = currentDate.getFullYear();
       const yearsToShow = 2; // 表示する過去の年数
@@ -150,7 +150,7 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
     }
 
     function handleMonthSelectChange() {
-      const selectYearMonth = document.querySelector('.month-select select');
+      const selectYearMonth = document.querySelector('.select-month select');
       const selectedYearMonth = selectYearMonth.value.split('-');
       const selectedYear = parseInt(selectedYearMonth[0], 10);
       const selectedMonth = parseInt(selectedYearMonth[1], 10);
