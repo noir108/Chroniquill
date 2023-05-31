@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.create(category_params)
-    redirect_to categories_path
+    redirect_to index2_schedules_path
   end
 
   def edit
@@ -27,7 +27,7 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     return unless current_user.id == @category.user.id
     @category.destroy
-    redirect_to categories_path
+    redirect_to  index2_schedules_path
   end
   
 

@@ -54,7 +54,14 @@
   </div>
 
   <div class="category">
-    <div class="title-bj">Category list</div>
+    <div class="title-bj">Category list</div><br>
+      <div class="new-form-cat">
+        <%= form_with model: @category, local: true, class: 'category-form', id: "cat-form"  do |f| %>
+          <%= f.hidden_field :id %>
+          <%= f.text_field :name, class: "form-cat" %>
+          <%= f.submit '+', class: 'cat-btn', id: "add-submit" %>
+        <% end %>
+      </div>
     <div class="category_list">
       <ul class="catlist">
         <% current_user.categories.each do |category| %>

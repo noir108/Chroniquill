@@ -199,3 +199,30 @@ ul.catlist li:after {
   -ms-transform: rotate(60deg);
   transform: rotate(60deg);
 }
+
+.new-form-cat {
+  width: 200px;
+  float: right;
+}
+
+.form-cat {
+  outline: none;
+  width: 150px;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 111, 95, 0.8);
+  background-color: transparent;
+}
+
+.cat-btn {
+  text-decoration: none;
+  background-color: rgba(0, 111, 95, 0.6);
+  color: #4d3614;
+  line-height: 10px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}

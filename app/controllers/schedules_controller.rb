@@ -12,6 +12,7 @@ class SchedulesController < ApplicationController
   
   def index2
     @schedules_by_month = current_user.schedules.order(start_time: :asc).group_by { |s| s.start_time.strftime('%Y-%m') }
+    @category = Category.new
   end
 
   def new
