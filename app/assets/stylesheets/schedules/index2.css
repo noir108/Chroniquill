@@ -153,19 +153,31 @@
   margin-left: 40px;
 }
 
-.category-contents {
-  font-size: 24px;
-  display: flex;
-  justify-content: space-between;
+.new-form-cat {
+  width: 200px;
+  float: right;
 }
 
-ul.catlist li {
-  width: 400px;
-  position: relative;
-  padding: 0.5em 0 0.2em 2.3em;
-  margin-bottom: 5px;
-  font-size: 15px;
+.form-cat {
+  outline: none;
+  width: 150px;
+  margin-bottom: 30px;
+  border: none;
   border-bottom: 1px solid rgba(0, 111, 95, 0.8);
+  background-color: transparent;
+}
+
+.cat-btn {
+  text-decoration: none;
+  background-color: rgba(0, 111, 95, 0.6);
+  color: #4d3614;
+  line-height: 10px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 ul.catlist li:after,
@@ -200,29 +212,136 @@ ul.catlist li:after {
   transform: rotate(60deg);
 }
 
-.new-form-cat {
+
+.category-contents {
   width: 200px;
-  float: right;
-}
-
-.form-cat {
-  outline: none;
-  width: 150px;
-  margin-bottom: 30px;
-  border: none;
+  margin-bottom: 5px;
+  font-size: 15px;
   border-bottom: 1px solid rgba(0, 111, 95, 0.8);
-  background-color: transparent;
+  white-space: nowrap;
+  position: relative;
+  line-height: 24px;
+  margin: 0 0 12px 0;
+  color: #4d3614;
+  display: flex;
 }
 
-.cat-btn {
-  text-decoration: none;
-  background-color: rgba(0, 111, 95, 0.6);
-  color: #4d3614;
-  line-height: 10px;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: 500;
-  border: none;
-  border-radius: 20px;
+.cat-de {
+  color: transparent;
+}
+
+/*                                        */
+/*           カテゴリー削除のアニメ           */
+/*                                        */
+
+.category-contents span {
+  display: block;
+  overflow: hidden;
+  transition: transform .3s ease .1s, opacity .5s ease .3s;
+}
+
+.category-contents span:nth-child(1) {
+  position: absolute;
+  left: 30px;
+  top: 0;
+  z-index: 1;
+  height: 12px;
+  transform-origin: left bottom;
+}
+
+.category-contents span:nth-child(2) {
+  position: relative;
+  left: 30px;
+  transform-origin: left center;
+}
+
+.category-contents span:nth-child(2):before {
+  content: '';
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 12px;
+  background: #e8d6ae;
+  position: absolute;
+  display: block;
+}
+
+.category-contents:last-child {
+  margin-bottom: 0;
+}
+
+.category-contents .line {
+  border-radius: 2px;
+  background: #F26175;
+  height: 2px;
+  margin: -1px -55px 0 20px;
+  top: 50%;
+  right: 6px;
+  position: absolute;
+  z-index: 1;
+}
+
+.cat-ed-de {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  left: 30px;
+  margin: 2px 0 0 8px;
   cursor: pointer;
+  opacity: .5;
+  transition: all .3s ease;
+}
+
+.cat-ed-de:before,
+.cat-ed-de:after {
+  content: '';
+  display: block;
+  position: absolute;
+  border-radius: 2px;
+  background: #F26175;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(135deg);
+  transition: all .5s ease;
+}
+
+.cat-ed-de:before {
+  width: 10px;
+  height: 2px;
+}
+
+.cat-ed-de:after {
+  height: 10px;
+  width: 2px;
+}
+
+.cat-ed-de.active:before,
+.cat-ed-de.active:after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.cat-ed-de.active:after {
+  opacity: 0;
+}
+
+.category-contents .cat-ed-de:hover {
+  -webkit-filter: grayscale(0%);
+  opacity: 1;
+}
+
+.category-contents.slice span {
+  opacity: 0;
+}
+
+.category-contents.slice span:nth-child(1) {
+  transform: rotate(-7deg) translate(0, -3px);
+}
+
+.category-contents.slice span:nth-child(2) {
+  transform: rotate(7deg) translate(0, 2px);
+}
+
+.category-contents.beforeSlice .cat-ed-de:before,
+.category-contents.beforeSlice .cat-ed-de:after {
+  display: none;
 }

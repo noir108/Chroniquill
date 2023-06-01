@@ -27,7 +27,6 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     return unless current_user.id == @category.user.id
     @category.destroy
-    redirect_to  index2_schedules_path
   end
   
 
