@@ -130,6 +130,10 @@
   font-weight: 700;
 }
 
+.date-content span {
+  cursor: pointer;
+}
+
 .event-acbox .acbox-under {
   height: 0px;
   overflow: hidden;
