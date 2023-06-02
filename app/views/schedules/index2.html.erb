@@ -33,9 +33,9 @@
               </div>
               <div class="date-content">
                 <% if s.description.present? %>
-                <span>▽</span>
+                <span>▽
                 <% end %>
-                <%= s.title %>
+                <%= s.title %></span>
                 <div class="date-ed-de">
                   <%= link_to  "編集", edit_schedule_path(id: s.id), class: "event-edit" %>
                   <%= link_to  "削除", schedule_path(id: s.id), method: :delete, class: "event-delete" %>
