@@ -37,8 +37,8 @@
                 <% end %>
                 <%= s.title %>
                 <div class="date-ed-de">
-                  <%= link_to  "編集" ,  edit_schedule_path(id: s.id), class: "event-edit" %>
-                  <%= link_to  "削除" ,  schedule_path(id: s.id), class: "event-delete" %>
+                  <%= link_to  "編集", edit_schedule_path(id: s.id), class: "event-edit" %>
+                  <%= link_to  "削除", schedule_path(id: s.id), method: :delete, class: "event-delete" %>
                 </div>
               </div>
             </label>
@@ -68,7 +68,7 @@
           <li class="category-contents">
               <span><%= category.name %></span>
             <div class="cat-ed-de">
-              <%= link_to  "○" ,  category_path(id: category.id), method: :delete,class: 'cat-de' %>
+              <%= link_to  "○" ,  category_path(id: category.id), method: :delete, class: 'cat-de' %>
             </div>
           </li>
         <% end %>
