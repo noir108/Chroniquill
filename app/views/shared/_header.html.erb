@@ -7,7 +7,10 @@
     <%= link_to 'Chroniquil', root_path, class:"t-title" %>
     </div>
   </div>
+  <% if user_signed_in? %>
   <div class='top-logout'>
     <%= link_to 'Close the Chroniquil', destroy_user_session_path, method: :delete, class: "logout" %>
   </div>
+  <% else %>
+  <% end %>
 </header>
