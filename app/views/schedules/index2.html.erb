@@ -81,7 +81,18 @@
 
 <script>
 $(function() {
+  //スクロールの記述
+  const topBtn = document.getElementById("scr-btn");
+  const indexSub = document.getElementById("ind-sub");
 
+  topBtn.addEventListener("click", () => {
+    indexSub.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
+  //削除アニメーションの記述
     $.fn.slideFadeToggle  = function(speed, easing, callback) {
         return this.animate({opacity: 'toggle', height: 'toggle'}, speed, easing, callback);
     };

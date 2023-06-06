@@ -2,7 +2,7 @@ class SchedulesController < ApplicationController
   before_action :set_schedule, only: [:edit, :update, :destroy]
 
   def index
-    @schedules = current_user.schedules
+    @schedules = current_user.schedules.includes(:category)
 
     respond_to do |format|
       format.html
