@@ -4,7 +4,23 @@
 <div class='index'>
 <%= render 'shared/loading' %>
 
-  <div class="calendar">
+  <div class="calendar tab-panels">
+    <ul class="tabs">
+      <li rel="panel-all", class="active", data-category-id="all">
+        全体
+      </li>
+      <% displayed_category_ids = [] %>
+      <% @schedules.each do |schedule| %>
+        <% category_id = schedule.category.id %>
+        <% if !displayed_category_ids.include?(category_id) %>
+          <% displayed_category_ids << category_id %>
+          <li rel="panel-<%= category_id %>" data-category-id="<%= category_id %>">
+            <%= schedule.category.name %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+
     <div class="calendar-header">
       <div id="prev-btn", class="prene-btn">←</div>
       <div class="month-y", id="month-year"></div>
@@ -24,6 +40,8 @@
       <!-- 日付部分 -->
     </div>
   </div>
+
+
   <div class="right_menu">
     <div class="new">
       <%= link_to "Write", new_schedule_path, class: "top-btn feather-icon-container" %>

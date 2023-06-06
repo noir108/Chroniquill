@@ -31,6 +31,10 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
       calendarBody.innerHTML = '';
       const year = currentDate.getFullYear();
       const month = currentDate.getMonth();
+      // 全体表示のdiv要素を作成
+      const calendarPanel = document.createElement('div');
+      calendarPanel.classList.add('calendar-panel', 'panel-all', 'active');
+      calendarBody.appendChild(calendarPanel);
 
       // 月と年を表示
       monthYear.textContent = `${year}年 ${month + 1}月`;
@@ -52,6 +56,8 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
         success: function (response) {
           // レスポンスを処理するコード
           const events = {};
+          let calendarPanels = {}; // calendarPanelsを配列として宣言
+
           for (let i = 0; i < response.length; i++) {
             const schedule = response[i];
             const startDateTime = new Date(schedule.start_time);
@@ -59,29 +65,55 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
             const scheduleMonth = startDateTime.getMonth() + 1;
             const scheduleDay = startDateTime.getDate();
             const scheduleKey = `${scheduleYear}-${String(scheduleMonth).padStart(2, '0')}-${String(scheduleDay).padStart(2, '0')}`;
+            //[0]がid、[1]が予定名、[2]がcategory_id
+            // カテゴリーごとのdiv要素を作成
+            const existingPanel = document.querySelector('.panel-' + schedule.category_id);
+            if (!existingPanel) {
+              // calendarPanelsの値を設定
+              calendarPanels[schedule.category_id] = document.createElement('div');
+              calendarPanels[schedule.category_id].classList.add('calendar-panel', 'panel-' + schedule.category_id);
+              calendarBody.appendChild(calendarPanels[schedule.category_id]);
+            }
+            // 同じ日付の予定が既に存在する場合は配列に追加
             if (events[scheduleKey]) {
-              events[scheduleKey].push([schedule.id, schedule.title]); // 同じ日付の予定が既に存在する場合は配列に追加
+              events[scheduleKey].push([schedule.id, schedule.title, schedule.category_id]);
             } else {
-              events[scheduleKey] = [[schedule.id, schedule.title]]; // 新しい日付の予定として配列を作成
+              events[scheduleKey] = [[schedule.id, schedule.title, schedule.category_id]]; // 新しい日付の予定として配列を作成
             }
           }
 
           // 前月と後月の日付を表示
           for (let i = 0; i < firstDay; i++) {
             const emptyDate = document.createElement('div');
-            emptyDate.classList.add('date', 'prev-month');
+            emptyDate.classList.add('prev-month');
             const prevMonthDate = new Date(year, month, -i).getDate();
             emptyDate.textContent = prevMonthDate;
-            calendarBody.appendChild(emptyDate);
+            calendarPanel.appendChild(emptyDate);
+            // 複製を各calendarPanels要素に追加
+            Object.values(calendarPanels).forEach((panel) => {
+              const clonedEmptyDate = emptyDate.cloneNode(true);
+              panel.appendChild(clonedEmptyDate);
+            });
           }
           // 日付を表示
           for (let i = 1; i <= lastDate; i++) {
             const date = document.createElement('div');
             date.classList.add('date');
             date.textContent = i;
-            calendarBody.appendChild(date);
+            // 今日の日付に色を付ける
+            const today = new Date();
+            if (year === today.getFullYear() && month === today.getMonth() && i === today.getDate()) {
+              date.classList.add('today');
+            }
+            calendarPanel.appendChild(date);
+            // 複製を各calendarPanels要素に追加
+            Object.values(calendarPanels).forEach((panel) => {
+              const clonedDate = date.cloneNode(true);
+              panel.appendChild(clonedDate);
+            });
 
-            //日付をキーに配列の値を取得[0]がid、[1]が予定名
+
+            //日付をキーに配列の値を取得
             const event = events[`${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`];
 
             // 値がある日付に予定名をリストで表示
@@ -91,6 +123,7 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
               date.appendChild(eventName);
               const eventList = document.createElement('ul');
               eventList.classList.add('event-ul');      // クラス名を追加
+
               for (let j = 0; j < event.length; j++) {
                 const eventItem = document.createElement('li');
                 eventItem.classList.add('event-list');  // クラス名を追加
@@ -104,14 +137,25 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
                   window.location.href = editUrl; // ブラウザを編集画面へのURLにリダイレクト
                 });
               }
+
               eventName.appendChild(eventList);
             }
 
-            // 今日の日付に色を付ける
-            const today = new Date();
-            if (year === today.getFullYear() && month === today.getMonth() && i === today.getDate()) {
-              date.classList.add('today');
-            }
+
+            $('.tab-panels .tabs li').on('click', function () {
+              // タブのアクティブクラスを切り替える処理
+              $('.tab-panels .tabs .active').removeClass('active');
+              $(this).addClass('active');
+
+              // 選択されたカテゴリーIDを取得
+              const paneltoshow = $(this).attr('rel');
+
+              $('.tab-panels .calendar-panel.active').css('max-height', '100').slideUp('100', function () {
+                $(this).removeClass('active');
+                $('.' + paneltoshow).addClass('active').css('max-height', 'none').hide().slideDown('100');
+              });
+            });
+
           }
         },
         error: function (xhr, status, error) {

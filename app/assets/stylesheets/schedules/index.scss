@@ -2,6 +2,54 @@
   width: 1300px;
 }
 
+/*                                        */
+/*                タブリスト                */
+/*                                        */
+
+.tabs {
+  margin: 0;
+  padding: 0;
+}
+
+.tabs li {
+  list-style-type: none;
+  display: inline-block;
+  background: #6d4845;
+  margin: 0;
+  padding: .5em 1.5em;
+  border-radius: .5em .5em 0 0;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tab-panels ul li:hover {
+  filter: brightness(80%);
+}
+
+.tabs li.active {
+  filter: brightness(80%);
+}
+
+.tab-panels .calendar-panel {
+  width: 1260px;
+  display: none;
+  grid-template-columns: repeat(7, 1fr);
+  border: solid #b69b63;
+  border-width: 2px 0 0 2px;
+  padding-bottom: 20px;
+}
+
+.tab-panels .calendar-panel.active {
+  display: grid;
+}
+
+
+/*                                        */
+/*                カレンダー                */
+/*                                        */
+
+
 .calendar-header {
   width: 10%;
   height: 40px;
@@ -24,11 +72,6 @@
 
 .calendar-body {
   width: 1260px;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  border: solid #b69b63;
-  border-width: 2px 0 0 2px;
-  padding-bottom: 20px;
 }
 
 .day-header {
@@ -62,6 +105,17 @@
 
 .prev-month {
   color: rgba(109, 73, 69, 0.5);
+  width: 180px;
+  /* カレンダーの日付部分の幅 */
+  height: 100px;
+  /* カレンダーの日付部分の高さ */
+  padding-left: 5px;
+  /* カレンダーの日付部分の内部余白 */
+  border: solid #b69b63;
+  border-width: 0 2px 2px 0;
+  /* カレンダーの日付部分の境界線 */
+  font-weight: 500;
+  position: relative;
 }
 
 /* 今日の日付に適用するスタイル */
