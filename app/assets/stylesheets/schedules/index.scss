@@ -58,6 +58,7 @@
   padding: 10px;
   color: #edeaec;
   background-color: #4d3614;
+  margin-top: 10px;
 }
 
 .prene-btn {
@@ -89,7 +90,8 @@
   width: 180px;
 }
 
-.date {
+.date,
+.all-date {
   width: 180px;
   /* カレンダーの日付部分の幅 */
   height: 100px;
@@ -123,7 +125,8 @@
   background-color: rgba(172, 41, 30, 0.5);
 }
 
-.event-ul {
+.event-ul,
+.all-event-ul {
   position: absolute;
   bottom: 8px;
   right: 5px;
@@ -132,7 +135,8 @@
   max-height: 80px;
 }
 
-.event-list {
+.event-list,
+.all-event-list {
   list-style-type: none;
   width: 130px;
   font-size: 12px;

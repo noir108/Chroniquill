@@ -31,6 +31,10 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
       calendarBody.innerHTML = '';
       const year = currentDate.getFullYear();
       const month = currentDate.getMonth();
+      // 全カテゴリーを表示
+      const allCalendarPanel = document.createElement('div');
+      allCalendarPanel.classList.add('calendar-panel', 'panel-all', 'active');
+      calendarBody.appendChild(allCalendarPanel);
 
       // 月と年を表示
       monthYear.textContent = `${year}年 ${month + 1}月`;
@@ -77,6 +81,59 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
             }
           }
 
+          // 全カテゴリーを表示用
+          for (let i = firstDay - 1; i >= 0; i--) {
+            const allEmptyDate = document.createElement('div');
+            allEmptyDate.classList.add('all-date', 'prev-month');
+            const allPrevMonthDate = new Date(year, month, -i).getDate();
+            allEmptyDate.textContent = allPrevMonthDate;
+            allCalendarPanel.appendChild(allEmptyDate);
+          }
+          for (let i = 1; i <= lastDate; i++) {
+            const allDate = document.createElement('div');
+            allDate.classList.add('all-date');
+            allDate.textContent = i;
+            // 今日の日付に色を付ける
+            const allToday = new Date();
+            if (year === allToday.getFullYear() && month === allToday.getMonth() && i === allToday.getDate()) {
+              allDate.classList.add('today');
+            }
+            allCalendarPanel.appendChild(allDate);
+
+            //日付をキーに配列の値を取得
+            const allEvent = events[`${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`];
+
+            // 値がある日付に予定名をリストで表示
+            if (allEvent) {
+              const allEventName = document.createElement('div');
+              allEventName.classList.add('all-event-name');    // クラス名を追加
+              allDate.appendChild(allEventName);
+              const allEventList = document.createElement('ul');
+              allEventList.classList.add('all-event-ul');      // クラス名を追加
+
+              for (let j = 0; j < allEvent.length; j++) {
+                const allEventItem = document.createElement('li');
+                allEventItem.classList.add('all-event-list');  // クラス名を追加
+                allEventItem.textContent = allEvent[j][1];
+                allEventList.appendChild(allEventItem);
+
+                // 予定名の要素にクリックイベントリスナーを追加
+                allEventItem.addEventListener('click', () => {
+                  const allScheduleId = allEvent[j][0];
+                  const allEditUrl = `/schedules/${allScheduleId}/edit`;
+                  window.location.href = allEditUrl;
+                });
+              }
+              allEventName.appendChild(allEventList);
+            }
+          }
+
+
+
+
+
+
+          // カテゴリーごとにdiv要素を作成
           for (let i = 0; i < caegoriesId['category_id'].length; i++) {
             const categoryId = caegoriesId['category_id'][i];
             const calendarPanels = document.createElement('div');
@@ -130,44 +187,22 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
                     });
                   }
                 }
-                // 全カテゴリーを表示
-                const allCalendarPanel = document.createElement('div');
-                allCalendarPanel.classList.add('calendar-panel', 'panel-all', 'active');
-                calendarBody.appendChild(allCalendarPanel);
-                // ...
-
-                const allEventList = document.createElement('ul');
-                allEventList.classList.add('event-ul');
-                allCalendarPanel.appendChild(allEventList);
-                // ...
-
-                for (let j = 0; j < event.length; j++) {
-                  // ...
-                  const eventItem = document.createElement('li');
-                  eventItem.classList.add('event-list');
-                  eventItem.textContent = event[j][1];
-                  allEventList.appendChild(eventItem);
-                  // ...
-                }
                 eventName.appendChild(eventList);
               }
-
-
-              $('.tab-panels .tabs li').on('click', function () {
-                // タブのアクティブクラスを切り替える処理
-                $('.tab-panels .tabs .active').removeClass('active');
-                $(this).addClass('active');
-
-                // 選択されたカテゴリーIDを取得
-                const paneltoshow = $(this).attr('rel');
-
-                $('.tab-panels .calendar-panel.active').css('max-height', '100').slideUp('100', function () {
-                  $(this).removeClass('active');
-                  $('.' + paneltoshow).addClass('active').css('max-height', 'none').hide().slideDown('100');
-                });
-              });
             }
           }
+
+          $('.tab-panels .tabs li').on('click', function () {
+            // タブのアクティブクラスを切り替える処理
+            $('.tab-panels .tabs .active').removeClass('active');
+            $(this).addClass('active');
+            // 選択されたカテゴリーIDを取得
+            const paneltoshow = $(this).attr('rel');
+            $('.tab-panels .calendar-panel.active').css('max-height', '100').slideUp('100', function () {
+              $(this).removeClass('active');
+              $('.' + paneltoshow).addClass('active').css('max-height', 'none').hide().slideDown('100');
+            });
+          });
         },
         error: function (xhr, status, error) {
           // エラーハンドリングのコード
