@@ -31,10 +31,7 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
       calendarBody.innerHTML = '';
       const year = currentDate.getFullYear();
       const month = currentDate.getMonth();
-      // 全カテゴリーを表示
-      const allCalendarPanel = document.createElement('div');
-      allCalendarPanel.classList.add('calendar-panel', 'panel-all', 'active');
-      calendarBody.appendChild(allCalendarPanel);
+
 
       // 月と年を表示
       monthYear.textContent = `${year}年 ${month + 1}月`;
@@ -81,7 +78,10 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
             }
           }
 
-          // 全カテゴリーを表示用
+          // 全カテゴリーを表示用         ここから
+          const allCalendarPanel = document.createElement('div');
+          allCalendarPanel.classList.add('calendar-panel', 'panel-all', 'active');
+          calendarBody.appendChild(allCalendarPanel);
           for (let i = firstDay - 1; i >= 0; i--) {
             const allEmptyDate = document.createElement('div');
             allEmptyDate.classList.add('all-date', 'prev-month');
@@ -127,13 +127,9 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
               allEventName.appendChild(allEventList);
             }
           }
+          //                            ここまで
 
-
-
-
-
-
-          // カテゴリーごとにdiv要素を作成
+          // カテゴリーごとにdiv要素を作成      ここから
           for (let i = 0; i < caegoriesId['category_id'].length; i++) {
             const categoryId = caegoriesId['category_id'][i];
             const calendarPanels = document.createElement('div');
@@ -191,6 +187,7 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
               }
             }
           }
+          //                            ここまで
 
           $('.tab-panels .tabs li').on('click', function () {
             // タブのアクティブクラスを切り替える処理
