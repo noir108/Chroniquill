@@ -218,7 +218,7 @@ ul.catlist li:after {
 
 
 .category-contents {
-  width: 200px;
+  width: 210px;
   margin-bottom: 5px;
   font-size: 15px;
   border-bottom: 1px solid rgba(0, 111, 95, 0.8);
@@ -231,7 +231,8 @@ ul.catlist li:after {
 }
 
 .cat-de {
-  font-size: 25px;
+  font-size: 20px;
+  line-height: 20px;
   color: transparent;
 }
 
@@ -292,7 +293,6 @@ ul.catlist li:after {
   height: 20px;
   left: 30px;
   margin: 2px 0 0 8px;
-  cursor: pointer;
   opacity: .5;
   transition: all .3s ease;
 }
