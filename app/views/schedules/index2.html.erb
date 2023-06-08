@@ -67,8 +67,7 @@
         <% current_user.categories.each do |category| %>
           <li class="category-contents">
               <span><%= category.name %></span>
-            <div class="cat-ed-de">
-              <%= link_to  "●" ,  category_path(id: category.id), method: :delete, class: 'cat-de' %>
+            <div class="cat-ed-de" id="<%= category.id %>">
             </div>
           </li>
         <% end %>
@@ -103,6 +102,21 @@ $(function() {
   });
 
   $('.category-contents .cat-ed-de').on('click', function(e) {
+    // DELETEリクエストを送信
+    const categoryId = $(this).attr('id'); // クリックされた要素のIDを取得
+    const categoryElement = $(this).closest('.category-contents'); // .cat-ed-deの親要素である.category-contentsを取得
+    // 削除の処理を実行
+    $.ajax({
+      url: '/categories/' + categoryId,
+      type: 'DELETE',
+      success: function() {
+        // 成功時の処理（例: カテゴリを削除した後の画面更新など）
+      },
+      error: function() {
+        // エラー時の処理
+      }
+    });
+
     $(this).addClass('active hover');
     const line = $('<div />').addClass('line');
     const li = $(this).parent();
