@@ -3,6 +3,8 @@ class Schedule < ApplicationRecord
   with_options presence: true do
     validates :title, :start_time
   end
+  validates :category_id, numericality: { greater_than: 0, message: 'please select' }
+
   validate :start_time_before_end_time, :end_time_after_start_time
 
   def start_time_before_end_time  #start_timeがend_timeより後の日付だとバツ

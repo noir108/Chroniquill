@@ -9,8 +9,13 @@
   overscroll-behavior-y: contain;
   overflow-y: auto;
   justify-content: center;
-  text-align: center;
   flex-direction: column;
+  text-align: center;
+}
+
+.form-flame {
+  max-width: 25%;
+  height: auto;
 }
 
 .schedule-form {
@@ -18,8 +23,19 @@
   margin: 0 auto;
 }
 
+.form-add {
+  text-decoration: none;
+  color: #00426d;
+  border: #00426d 1.5px solid;
+  border-radius: 20px;
+  padding: 0 10px;
+  margin-left: 10px;
+  line-height: 30px;
+}
+
 .form-group {
   margin-bottom: 30px;
+  text-align: left;
 }
 
 .form-label {
@@ -72,10 +88,4 @@
   border: none;
   border-radius: 7px;
   cursor: pointer;
-}
-
-.form-flame {
-  margin: 25px 0 10px 0;
-  max-width: 25%;
-  height: auto;
 }

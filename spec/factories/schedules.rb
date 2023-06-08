@@ -5,5 +5,6 @@ FactoryBot.define do
     end_time { Faker::Time.between_dates(from: Date.today, to: 1.year.from_now) }
     description { "備考欄" }
     association :user
+    association :category
   end
 end

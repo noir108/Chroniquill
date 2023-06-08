@@ -1,5 +1,6 @@
 class SchedulesController < ApplicationController
   before_action :set_schedule, only: [:edit, :update, :destroy]
+  before_action :set_category, only: [:new, :create, :edit, :update]
 
   def index
     @schedules = current_user.schedules.includes(:category)
@@ -17,7 +18,8 @@ class SchedulesController < ApplicationController
 
   def new
     @schedule = Schedule.new
-    @categories = current_user.categories
+    @category = Category.new
+
   end
   
   def create
@@ -30,7 +32,6 @@ class SchedulesController < ApplicationController
   end
 
 def edit
-  @categories = current_user.categories
 end
 
 def update
@@ -51,10 +52,15 @@ end
   private
 
   def schedule_params
-    params.require(:schedule).permit(:title, :start_time, :end_time, :description).merge(user_id: current_user.id, category_id: params[:schedule][:category_id])
+    params.require(:schedule).permit(:title, :start_time, :end_time, :description, :category_id).merge(user_id: current_user.id)
   end
 
   def set_schedule
     @schedule = Schedule.includes(:user).find(params[:id])
   end
+
+  def set_category
+    @categories = current_user.categories
+  end
+  
 end
