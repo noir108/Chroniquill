@@ -9,6 +9,7 @@
       <li rel="panel-all", class="active", data-category-id="all">
         全体
       </li>
+      <% @schedules = @schedules.sort_by { |schedule| schedule.category.id } %>
       <% displayed_category_ids = [] %>
       <% @schedules.each do |schedule| %>
         <% category_id = schedule.category.id %>
