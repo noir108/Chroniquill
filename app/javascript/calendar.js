@@ -57,18 +57,35 @@ if (window.location.pathname === '/schedules' || window.location.pathname === '/
 
           for (let i = 0; i < response.length; i++) {
             const schedule = response[i];
+            //start_time
             const startDateTime = new Date(schedule.start_time);
             const scheduleYear = startDateTime.getFullYear();
             const scheduleMonth = startDateTime.getMonth() + 1;
             const scheduleDay = startDateTime.getDate();
             const scheduleKey = `${scheduleYear}-${String(scheduleMonth).padStart(2, '0')}-${String(scheduleDay).padStart(2, '0')}`;
-            //[0]がid、[1]が予定名、[2]がcategory_id
-            // 同じ日付の予定が既に存在する場合は配列に追加
+            //end_time
+            const endDateTime = new Date(schedule.end_time);
+            const endYear = endDateTime.getFullYear();
+            const endMonth = endDateTime.getMonth() + 1;
+            const endDay = endDateTime.getDate();
+            const endKey = `${endYear}-${String(endMonth).padStart(2, '0')}-${String(endDay).padStart(2, '0')}`;
+
+            //キーがstart_time、[0]がid、[1]が予定名、[2]がcategory_id、[3]がend_time、
+            // end_timeがあれば配列に追加、同じ日付の予定が既に存在する場合は配列に追加
             if (events[scheduleKey]) {
-              events[scheduleKey].push([schedule.id, schedule.title, schedule.category_id]);
+              if (schedule.end_time) {
+                events[scheduleKey].push([schedule.id, schedule.title, schedule.category_id, endKey]);
+              } else {
+                events[scheduleKey].push([schedule.id, schedule.title, schedule.category_id]);
+              }
             } else {
-              events[scheduleKey] = [[schedule.id, schedule.title, schedule.category_id]]; // 新しい日付の予定として配列を作成
+              if (schedule.end_time) {
+                events[scheduleKey] = [[schedule.id, schedule.title, schedule.category_id, endKey]];
+              } else {
+                events[scheduleKey] = [[schedule.id, schedule.title, schedule.category_id]];
+              }
             }
+
             // カテゴリーIDを一意に配列へ追加
             if (!caegoriesId.hasOwnProperty('category_id')) {
               caegoriesId['category_id'] = [];

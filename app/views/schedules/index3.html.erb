@@ -1,0 +1,92 @@
+  <div id='calendar'></div>
+
+
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+  var calendarEl = document.getElementById('calendar');
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+  const startYear = (currentYear - 2) + '-' + (currentMonth) + '-01'; // 表示する過去の年数
+  const endYear = (currentYear + 1) + '-' + (currentMonth) + '-01'; // 表示する未来の年数
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+        headerToolbar: {
+        left: "prev,next today",
+        center: "title",
+        right: "dayGridMonth,timeGridWeek,listWeek",
+    },
+
+    // 表示期間
+    validRange: function () {
+      return {
+        start: startYear,
+        end: endYear
+      };
+    },
+
+    // Ajaxでデータを取得して予定を表示
+    events: function (info, successCallback, failureCallback) {
+      $.ajax({
+        url: '/schedules', // データを取得するURL
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+          // レスポンスを処理するコード
+          const events = [];
+          for (let i = 0; i < response.length; i++) {
+            const schedule = response[i];
+            //start_time
+            const startDateTime = new Date(schedule.start_time);
+            const startYear = startDateTime.getFullYear();
+            const startMonth = startDateTime.getMonth() + 1;
+            const startDay = startDateTime.getDate();
+            const startKey = `${startYear}-${String(startMonth).padStart(2, '0')}-${String(startDay).padStart(2, '0')}`;
+            //end_time
+            const endDateTime = new Date(schedule.end_time);
+            const endYear = endDateTime.getFullYear();
+            const endMonth = endDateTime.getMonth() + 1;
+            const endDay = endDateTime.getDate();
+            const EndKey = `${endYear}-${String(endMonth).padStart(2, '0')}-${String(endDay).padStart(2, '0')}`;
+            const eventUrl = window.location.href.toString(); // クリックされたイベントのURLを取得
+            // end_timeがある時とない時
+            if (schedule.end_time) {
+              const event = {
+                id: schedule.id,                      // イベントのタイトル
+                title: schedule.title,                // イベントのタイトル
+                start: startKey,                      // イベントの開始日
+                end: EndKey,                          // イベントの終了日
+                url: `/schedules/${schedule.id}/edit`, // イベントの編集URL
+                classNames: 'event-list'
+              };
+              events.push(event);
+            } else {
+              const event = {
+                id: schedule.id,
+                title: schedule.title, 
+                start: startKey, 
+                url: `/schedules/${schedule.id}/edit`,
+                classNames: 'event-list'
+              };
+              events.push(event);
+            }
+          }
+          successCallback(events); // イベントデータをカレンダーに渡す
+        },
+        error: function (xhr, status, error) {
+          // エラーハンドリングのコード
+          failureCallback(error); // エラー時の処理
+        }
+      });
+    }
+    // Ajaxでデータを取得して予定を表示     ここまで
+
+
+
+  });
+  calendar.render();
+});
+
+</script>
