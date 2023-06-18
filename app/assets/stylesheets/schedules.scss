@@ -8,6 +8,35 @@
   padding: 30px 0 0 30px;
 }
 
+.fc .fc-scrollgrid {
+  border-width: 0;
+}
+
+.fc .fc-scrollgrid-section>* {
+  border: none;
+}
+
+.fc .fc-scrollgrid-sync-table {
+  border: 1px;
+}
+
+.fc .fc-col-header-cell {
+  border: none;
+}
+
+.circle-number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  flex-flow: column;
+  vertical-align: top;
+  background: #eb5757;
+  color: white;
+  width: 30px;
+  height: 30px;
+}
+
 /*                                        */
 /*                年月日選択                */
 /*                                        */
