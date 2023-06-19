@@ -1,5 +1,21 @@
 <div class='index'>
   <div class="calendar">
+    <ul class="tabs">
+      <li rel="panel-all", class="active", data-category-id="all">
+        全体
+      </li>
+      <% @schedules = @schedules.sort_by { |schedule| schedule.category.id } %>
+      <% displayed_category_ids = [] %>
+      <% @schedules.each do |schedule| %>
+        <% category_id = schedule.category.id %>
+        <% if !displayed_category_ids.include?(category_id) %>
+          <% displayed_category_ids << category_id %>
+          <li rel="panel-<%= category_id %>" data-category-id="<%= category_id %>">
+            <%= schedule.category.name %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
     <div id='calendar'></div>
   </div>
 </div>

@@ -16,6 +16,15 @@ class SchedulesController < ApplicationController
     @category = Category.new
   end
 
+  def index3
+    @schedules = current_user.schedules.includes(:category)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @schedules }
+    end
+  end
+
   def new
     @schedule = Schedule.new
     @category = Category.new
