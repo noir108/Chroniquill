@@ -22,6 +22,18 @@
 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 <script>
+$('.tab-panels .tabs li').on('click', function () {
+  // タブのアクティブクラスを切り替える処理
+  $('.tab-panels .tabs .active').removeClass('active');
+  $(this).addClass('active');
+  // 選択されたカテゴリーIDを取得
+  const paneltoshow = $(this).attr('rel');
+  $('.tab-panels .calendar-panel.active').css('max-height', '100').slideUp('100', function () {
+    $(this).removeClass('active');
+    $('.' + paneltoshow).addClass('active').css('max-height', 'none').hide().slideDown('100');
+  });
+});
+
 
 document.addEventListener('DOMContentLoaded', function () {
   var calendarEl = document.getElementById('calendar');
@@ -32,10 +44,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const endYear = (currentYear + 1) + '-' + (currentMonth) + '-01'; // 表示する未来の年数
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
-        headerToolbar: {
-        left: "prev,next today",
-        center: "title",
-        right: "dayGridMonth,timeGridWeek,listWeek",
+    headerToolbar: {
+      left: "prev,next today",
+      center: "title",
+      right: "dayGridMonth,timeGridWeek,listWeek",
     },
 
     // 表示期間
@@ -46,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
       };
     },
     contentHeight: 'auto',
-    dayMaxEvents: true,
+    dayMaxEvents: 2,
     navLinks: true,
     editable: true,
     // Ajaxでデータを取得して予定を表示
@@ -87,8 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
               const event = {
                 id: schedule.id,
-                title: schedule.title, 
-                start: startKey, 
+                title: schedule.title,
+                start: startKey,
                 url: `/schedules/${schedule.id}/edit`,
                 classNames: 'event-list'
               };

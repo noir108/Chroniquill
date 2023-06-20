@@ -66,3 +66,5 @@ end
 
 gem 'devise'
 gem 'jquery-rails'
+gem 'momentjs-rails'
+gem 'fullcalendar-rails'
