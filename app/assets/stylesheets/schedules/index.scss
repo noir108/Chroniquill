@@ -37,7 +37,6 @@
   grid-template-columns: repeat(7, 1fr);
   border: solid #b69b63;
   border-width: 2px 0 0 2px;
-  padding-bottom: 20px;
 }
 
 .tab-panels .calendar-panel.active {
@@ -73,6 +72,7 @@
 
 .calendar-body {
   width: 1260px;
+  padding-bottom: 20px;
 }
 
 .day-header {

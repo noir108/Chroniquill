@@ -18,24 +18,29 @@
       <div class="date-month" id="<%= month %>"><%= month %></div>
       <ul class="event-acbox">
           <% schedules.each do |s| %>
-          <li class="acbox-item">
+          <li class="acbox-items">
             <input id="ac-<%= s.id %>" type="checkbox" />
             <label for="ac-<%= s.id %>" class="fade-text to__bottom" style="--duration: 2.4s; --delay: 0.6s; --ease: ease-out">
-              <div class="date-day">
-                <%= s.start_time.strftime('%m/%d') %>
-                <% if s.end_time.present? %>
-                   〜 
-                <% end %>
-                <%= s.end_time&.strftime('%m/%d') %>
-              </div>
-              <div class="date-cat">
-                category: <%= s.category.name %>
-              </div>
-              <div class="date-content">
-                <% if s.description.present? %>
-                <span>▽
-                <% end %>
-                <%= s.title %></span>
+              <div class="acbox-item">
+                <div class="date-item">
+                  <% if s.description.present? %>
+                    <div class="span1" style="cursor: pointer;">▽
+                  <% else %>
+                    <div class="span1">　
+                  <% end %>
+                      <%= s.start_time.strftime('%m/%d') %>
+                      <% if s.end_time.present? %>
+                         〜 
+                      <% end %>
+                      <%= s.end_time&.strftime('%m/%d') %>
+                    </div>
+                    <div class="span2">
+                      cat: <%= s.category.name %>
+                    </div>
+                    <div class="span3">
+                      <%= s.title %>
+                    </div>
+                </div>
                 <div class="date-ed-de">
                   <%= link_to  "編集", edit_schedule_path(id: s.id), class: "event-edit" %>
                   <%= link_to  "削除", schedule_path(id: s.id), method: :delete, class: "event-delete" %>

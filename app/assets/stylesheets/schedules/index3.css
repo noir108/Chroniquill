@@ -1,0 +1,19 @@
+:root {
+  --fc-border-color: rgba(77, 54, 20, 0.5);
+  /*枠線*/
+  --fc-button-text-color: #edeaec;
+  --fc-button-bg-color: #00426d;
+  --fc-button-hover-bg-color: #00426d;
+  --fc-button-active-bg-color: #00426d;
+  --fc-button-border-color: transparent;
+  --fc-button-hover-border-color: transparent;
+  --fc-button-active-border-color: transparent;
+  --fc-neutral-text-color: transparent;
+  /*ボタン関連*/
+  --fc-today-bg-color: rgba(172, 41, 30, 0.2);
+  /*ボタン関連*/
+}
+
+.fc .fc-button {
+  border-radius: 25px;
+}

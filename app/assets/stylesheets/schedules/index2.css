@@ -103,8 +103,8 @@
   padding: 10px;
 }
 
-.acbox-item {
-  width: 800px;
+.acbox-items {
+  width: 700px;
   border-bottom: 2px solid #b69b63;
   margin-bottom: 20px;
 }
@@ -113,25 +113,35 @@
   display: none;
 }
 
-.date-day {
-  width: 200px;
+.acbox-item {
+  width: 700px;
   font-weight: 300;
-}
-
-.date-cat {
-  width: 200px;
-  font-size: 16px;
-  margin-left: 10px;
-}
-
-.date-content {
   display: flex;
   justify-content: space-between;
-  font-weight: 700;
 }
 
-.date-content span {
-  cursor: pointer;
+.date-item {
+  display: flex;
+}
+
+.span1 {
+  width: 160px;
+}
+
+.span2 {
+  width: 180px;
+}
+
+.span3 {
+  width: 200px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+.date-ed-de {
+  margin-bottom: 2px;
 }
 
 .event-acbox .acbox-under {

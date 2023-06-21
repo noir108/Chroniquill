@@ -16,7 +16,9 @@
         <% end %>
       <% end %>
     </ul>
-    <div id='calendar'></div>
+    <div class="calendar-body">
+      <div id='calendar'></div>
+    </div>
   </div>
 </div>
 
@@ -45,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
     headerToolbar: {
-      left: "prev,next today",
+      left: "prev today next",
       center: "title",
       right: "dayGridMonth,timeGridWeek,listWeek",
     },
@@ -57,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         end: endYear
       };
     },
-    contentHeight: 'auto',
+    contentHeight: 650,
     dayMaxEvents: 2,
     navLinks: true,
     editable: true,
