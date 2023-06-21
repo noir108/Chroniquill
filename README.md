@@ -33,8 +33,7 @@ chroniquill（クロニクイル）
 
 
 
-
-<details><summary>## テーブル構造</summary>
+## <details><summary>テーブル構造</summary>
 
 ### Usersテーブル
 
