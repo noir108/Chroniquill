@@ -7,6 +7,7 @@
       <div class="title-bj">Bullet journal</div>
       <div class="select-month-ind2">
         <select>
+          <option>----</option>
           <% @schedules_by_month.each do |month, schedules| %>
             <option value="#<%= month %>"><%= month %></option>
           <% end %>
@@ -15,46 +16,48 @@
     </div>
 
     <% @schedules_by_month.each do |month, schedules| %>
-      <div class="date-month" id="<%= month %>"><%= month %></div>
-      <ul class="event-acbox">
-          <% schedules.each do |s| %>
-          <li class="acbox-items">
-            <input id="ac-<%= s.id %>" type="checkbox" />
-            <label for="ac-<%= s.id %>" class="fade-text to__bottom" style="--duration: 2.4s; --delay: 0.6s; --ease: ease-out">
-              <div class="acbox-item">
-                <div class="date-item">
-                  <% if s.description.present? %>
-                    <div class="span1" style="cursor: pointer;">▽
-                  <% else %>
-                    <div class="span1">　
-                  <% end %>
-                      <%= s.start_time.strftime('%m/%d') %>
-                      <% if s.end_time.present? %>
-                         〜 
-                      <% end %>
-                      <%= s.end_time&.strftime('%m/%d') %>
-                    </div>
-                    <div class="span2">
-                      cat: <%= s.category.name %>
-                    </div>
-                    <div class="span3">
-                      <%= s.title %>
-                    </div>
+      <div class='main-bj'>
+        <h4 class="date-month" id="<%= month %>"><%= month %></h4>
+        <ul class="event-acbox">
+            <% schedules.each do |s| %>
+            <li class="acbox-items">
+              <input id="ac-<%= s.id %>" type="checkbox" />
+              <label for="ac-<%= s.id %>" class="fade-text to__bottom" style="--duration: 2.4s; --delay: 0.6s; --ease: ease-out">
+                <div class="acbox-item">
+                  <div class="date-item">
+                    <% if s.description.present? %>
+                      <div class="span1" style="cursor: pointer;">▽
+                    <% else %>
+                      <div class="span1">　
+                    <% end %>
+                        <%= s.start_time.strftime('%m/%d') %>
+                        <% if s.end_time.present? %>
+                           〜 
+                        <% end %>
+                        <%= s.end_time&.strftime('%m/%d') %>
+                      </div>
+                      <div class="span2">
+                        cat: <%= s.category.name %>
+                      </div>
+                      <div class="span3">
+                        <%= s.title %>
+                      </div>
+                  </div>
+                  <div class="date-ed-de">
+                    <%= link_to  "編集", edit_schedule_path(id: s.id), class: "event-edit" %>
+                    <%= link_to  "削除", schedule_path(id: s.id), method: :delete, class: "event-delete" %>
+                  </div>
                 </div>
-                <div class="date-ed-de">
-                  <%= link_to  "編集", edit_schedule_path(id: s.id), class: "event-edit" %>
-                  <%= link_to  "削除", schedule_path(id: s.id), method: :delete, class: "event-delete" %>
+              </label>
+              <% if s.description.present? %>
+                <div class="acbox-under">
+                  <%= s.description %>
                 </div>
-              </div>
-            </label>
-            <% if s.description.present? %>
-              <div class="acbox-under">
-                <%= s.description %>
-              </div>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
   </div>
 
@@ -85,6 +88,20 @@
 
 <script>
 $(function() {
+  //セレクトボックススクロールの記述
+  $('select').change(function () {
+    // スクロールの速度
+    const speed = 400; // ミリ秒
+    const indSub = document.getElementById("ind-sub");
+    const href = $(this).val(); // リンク先（value）を取得して、hrefという変数に代入
+    const target = $(href == "#" || href == "" ? 'html' : href); // リンク先(href）のidがある要素を探して、targetに代入
+    const position = target.offset().top; // idの要素の位置をoffset()で取得して、positionに代入
+    indSub.scroll({
+      top: position - 80,
+      behavior: "smooth",
+    });
+  });
+
   //スクロールの記述
   const topBtn = document.getElementById("scr-btn");
   const indexSub = document.getElementById("ind-sub");
