@@ -1,6 +1,7 @@
 class SchedulesController < ApplicationController
   before_action :set_schedule, only: [:edit, :update, :destroy]
   before_action :set_category, only: [:new, :create, :edit, :update]
+  before_action :move_to_index, only: [:edit]
 
   def index
     @schedules = current_user.schedules.includes(:category)
@@ -72,4 +73,9 @@ end
     @categories = current_user.categories
   end
   
+  def move_to_index
+    return unless current_user.id != @schedule.user.id
+
+    redirect_to root_path
+  end
 end
